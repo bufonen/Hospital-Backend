@@ -1,0 +1,17 @@
+fastapi
+uvicorn[standard]
+SQLAlchemy
+psycopg2-binary
+pydantic[email]
+python-jose[cryptography]
+passlib
+alembic
+python-multipart
+python-dotenv
+aiofiles
+mypy
+pytest
+httpx
+pytest-asyncio
+redis
+apscheduler
