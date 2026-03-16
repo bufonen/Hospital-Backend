@@ -140,7 +140,7 @@ if STATIC_DIR.exists():
 
 if __name__ == '__main__':
     #correr programa con: pyton main.py
-    host = os.getenv('HOST', '127.0.0.1')
+    host = os.getenv('HOST', '0.0.0.0')
     port = int(os.getenv('PORT', 8000))
     reload = os.getenv('RELOAD', 'True').lower() in ('1','true','yes')
     print(f"Starting uvicorn on {host}:{port} (reload={reload})")
