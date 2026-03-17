@@ -5,6 +5,7 @@ HU-4.02: Post-Orden
 REFACTORIZADO: Ahora utiliza OrdenRetrasadaAlertFactory para creación de alertas.
 """
 from sqlalchemy.orm import Session, joinedload
+from sqlalchemy import cast, String
 from database.models import (
     OrdenCompra, DetalleOrdenCompra, EstadoOrdenEnum,
     Proveedor, Medicamento, EstadoEnum, AuditLog,
@@ -59,7 +60,7 @@ class OrdenCompraService:
         alerta_existente = self.db.query(Alerta).filter(
             Alerta.estado == EstadoAlertaEnum.ACTIVA,
             Alerta.tipo == TipoAlertaEnum.ORDEN_RETRASADA,
-            Alerta.metadatos.contains({'orden_id': str(orden.id)})
+            cast(Alerta.metadatos, String).contains(str(orden.id))
         ).first()
         
         if alerta_existente:
@@ -109,7 +110,7 @@ class OrdenCompraService:
         alerta = self.db.query(Alerta).filter(
             Alerta.estado == EstadoAlertaEnum.ACTIVA,
             Alerta.tipo == TipoAlertaEnum.ORDEN_RETRASADA,
-            Alerta.metadatos.contains({'orden_id': str(orden_id)})
+            cast(Alerta.metadatos, String).contains(str(orden_id))
         ).first()
         
         if alerta:
